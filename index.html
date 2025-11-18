@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progeria - Cirurgia Estética Avançada</title>
+    <!-- Incluir Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Incluir Lucide Icons para os ícones -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <script>
+        // Configuração personalizada do Tailwind para simular as fontes e cores da imagem
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-primary': '#A34354', // Bordô de destaque
+                        'brand-light': '#F9F9F9',
+                        'text-dark': '#333333',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        // Usando Playfair Display para simular a serifa dos títulos
+                        heading: ['"Playfair Display"', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Estilo para garantir que o ícone do menu funcione corretamente */
+        .lucide-icon {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        /* Estilização específica para a seção Hero para imitar o corte diagonal */
+        .hero-section {
+            background-color: #fcfcfc;
+            position: relative;
+            padding-bottom: 8rem; /* Espaço para o corte inferior */
+        }
+
+        /* Simulação do corte diagonal inferior */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px; /* Altura do corte */
+            background: white;
+            /* Isso cria uma forma que corta a seção */
+            clip-path: polygon(0 40%, 100% 0, 100% 100%, 0% 100%);
+            z-index: 10;
+        }
+
+        /* Ajuste para mobile onde o corte pode ser menos desejável ou mais simples */
+        @media (max-width: 768px) {
+            .hero-section::after {
+                clip-path: none;
+                height: 0;
+                padding-bottom: 2rem;
+            }
+        }
+        /* Para garantir um scroll suave para as âncoras */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* --- Estilos de Efeito Glassmorphism (Vidro Líquido) --- */
+        .glass-effect {
+            background-color: rgba(255, 255, 255, 0.9); /* Branco semi-transparente */
+            backdrop-filter: blur(10px); /* O efeito de desfoque/frosted */
+            -webkit-backdrop-filter: blur(10px); /* Para Safari compatibility */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        /* --- Estilos de Animação para o Menu Mobile (Efeito 'Ripple/Splash') --- */
+        
+        /* Classe inicial para o estado fechado (oculto) */
+        .mobile-menu-closed {
+            opacity: 0;
+            /* Inicia ligeiramente encolhido e invisível */
+            transform: scale(0.95); 
+            transform-origin: top center; 
+            /* Transições mais simples para o overlay */
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        /* Classe para o estado aberto */
+        .mobile-menu-open {
+            opacity: 1;
+            /* Expande para o tamanho normal */
+            transform: scale(1); 
+            transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+        }
+    </style>
+</head>
+<body class="font-sans text-text-dark bg-white">
+
+    <!-- Top Bar (Barra Superior) -->
+    <div class="bg-brand-light py-2 border-b border-gray-100 hidden md:block">
+        <div class="max-w-7xl mx-auto flex justify-end px-4 sm:px-6 lg:px-8">
+            <span class="text-xs text-gray-500 mr-4">Bem-vindo(a) à nossa companhia!</span>
+            <div class="flex items-center text-xs text-gray-500">
+                <i data-lucide="mail" class="lucide-icon w-3 h-3 mr-1"></i>
+                <span>Mail: info@email.com</span>
+                <div class="ml-4 flex space-x-3">
+                    <i data-lucide="twitter" class="lucide-icon w-3 h-3 cursor-pointer hover:text-brand-primary transition"></i>
+                    <i data-lucide="facebook" class="lucide-icon w-3 h-3 cursor-pointer hover:text-brand-primary transition"></i>
+                    <i data-lucide="instagram" class="lucide-icon w-3 h-3 cursor-pointer hover:text-brand-primary transition"></i>
+                    <i data-lucide="youtube" class="lucide-icon w-3 h-3 cursor-pointer hover:text-brand-primary transition"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header (Navegação Principal) -->
+    <header class="sticky top-0 z-40 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Padding do Cabeçalho aumentado de h-20 para py-6 -->
+            <div class="flex justify-between items-center py-6">
+                <!-- Logo (Placeholder para imagem) -->
+                <!-- Substitua o src="https://placehold.co/..." pelo URL da sua logo. -->
+                <a href="#home" class="flex items-center space-x-2">
+                    <img src="https://placehold.co/150x40/A34354/ffffff?text=LOGO" alt="Logotipo da Clínica Progeria" class="h-10 w-auto">
+                </a>
+
+                <!-- Navegação Desktop -->
+                <nav class="hidden lg:flex space-x-8 items-center text-sm font-medium">
+                    <a href="#home" class="text-text-dark hover:text-brand-primary transition">HOME</a>
+                    <a href="#sobre" class="text-text-dark hover:text-brand-primary transition">SOBRE MIM</a>
+                    <!-- Páginas e Notícias removidos -->
+                    <a href="#servicos" class="text-text-dark hover:text-brand-primary transition">SERVIÇOS</a>
+                    <a href="#contato" class="text-text-dark hover:text-brand-primary transition">CONTATO</a>
+                    <!-- Botão de CTA no Header: Efeito 'bolha' adicionado (escala e leve levantamento) -->
+                    <a href="#contato" class="py-4 px-8 bg-brand-primary text-white text-sm font-semibold rounded-xl shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
+                        Marcar Avaliação
+                    </a>
+                </nav>
+
+                <!-- Menu Mobile Button -->
+                <button id="mobile-menu-button" class="lg:hidden text-gray-600 hover:text-brand-primary focus:outline-none">
+                    <i data-lucide="menu" class="lucide-icon w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Container (FIXED OVERLAY com Efeito Glass) -->
+        <!-- top-[96px] é uma estimativa da altura do cabeçalho. z-30 para ficar abaixo do cabeçalho. -->
+        <nav id="mobile-menu" class="lg:hidden fixed w-full top-[96px] bottom-0 z-30 glass-effect mobile-menu-closed hidden">
+            <!-- Container dos itens do menu: h-full para preencher o overlay e overflow-y-auto para permitir scroll -->
+            <div class="px-4 pt-4 pb-3 space-y-1 h-full overflow-y-auto">
+                <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">HOME</a>
+                <a href="#sobre" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">SOBRE MIM</a>
+                <a href="#servicos" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">SERVIÇOS</a>
+                <a href="#contato" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">CONTATO</a>
+                <!-- O botão de CTA foi alterado para um link de texto simples, mas com destaque na cor da marca -->
+                <a href="#contato" class="block px-3 py-3 rounded-md text-base font-semibold text-brand-primary hover:bg-gray-100 transition mt-4" onclick="document.getElementById('mobile-menu-button').click();">
+                    Marcar Avaliação
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Botão Flutuante do WhatsApp -->
+    <!-- Note: Substitua SEU_NUMERO_AQUI pelo seu número de telefone, incluindo o código do país (ex: 5511999999999) -->
+    <a href="https://api.whatsapp.com/send?phone=SEU_NUMERO_AQUI&text=Olá! Gostaria de agendar uma avaliação." target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl transition duration-300 transform hover:scale-[1.1] hover:shadow-xl hover:-translate-y-0.5" aria-label="Fale conosco pelo WhatsApp">
+        <i data-lucide="message-square-text" class="lucide-icon w-6 h-6"></i>
+    </a>
+
+    <!-- Hero Section (Seção Principal) -->
+    <section id="home" class="hero-section overflow-hidden">
+        <div class="max-w-7xl mx-auto relative px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-20 lg:pb-32">
+            
+            <div class="lg:grid lg:grid-cols-2 lg:gap-12 relative z-20">
+                <!-- Conteúdo de Texto -->
+                <div class="pt-10 pb-10 lg:pb-0 order-2 lg:order-1">
+                    <p class="text-brand-primary text-sm font-semibold uppercase mb-2">Transformação Estética</p>
+                    <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-gray-800">
+                        Tratamentos Estéticos Avançados e Bem-Estar.
+                    </h1>
+                    <p class="text-gray-600 mb-8 max-w-lg">
+                        Elevamos sua beleza natural e autoconfiança através de tratamentos estéticos precisos e personalizados, desenhados para a sua jornada de transformação.
+                    </p>
+
+                    <div class="flex space-x-4 items-center">
+                        <!-- Botão na Seção Hero: Efeito 'bolha' adicionado (escala e leve levantamento) -->
+                        <a href="#contato" class="py-3 px-8 bg-brand-primary text-white font-semibold rounded-md shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
+                            Marcar Avaliação
+                        </a>
+                        <!-- Botão Secundário: Linkado para Serviços -->
+                        <a href="#servicos" class="text-gray-600 font-medium hover:text-brand-primary transition">
+                            Todos os Serviços
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Imagem (Posicionada para se sobrepor/destacar) -->
+                <div class="mt-8 lg:mt-0 order-1 lg:order-2 flex justify-center lg:justify-end">
+                    <!-- A imagem é um placeholder, usei um URL de exemplo -->
+                    <img
+                        src="https://placehold.co/600x680/f7f7f7/000000?text=Modelo+Cirurgia+Facial"
+                        alt="Imagem de uma modelo recebendo um procedimento estético facial."
+                        class="w-full max-w-md lg:max-w-none lg:w-[600px] h-auto object-cover rounded-xl shadow-2xl"
+                    />
+                </div>
+            </div>
+            <!-- Elemento decorativo visto na imagem original (pequeno texto lateral) -->
+            <div class="absolute top-1/4 right-0 hidden lg:block text-xs text-gray-400 transform rotate-90 origin-right">
+                <span class="tracking-widest">Mail: info@email.com</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services/Features Section (Seção de Serviços com Ícones) -->
+    <section id="servicos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-sm text-brand-primary uppercase font-semibold mb-2">Nossos Tratamentos</p>
+                <h2 class="font-heading text-4xl font-bold text-gray-800">
+                    Serviços Estéticos e de Bem-Estar
+                </h2>
+            </div>
+            <!-- Grid de Ícones -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+                
+                <!-- Item 1: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
+                    <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
+                        <i data-lucide="droplet" class="lucide-icon w-8 h-8 text-brand-primary"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-1 text-gray-800">Lipo Enzimática</h3>
+                    <p class="text-xs text-gray-500">
+                        Aplicação de enzimas para redução de gordura localizada e medidas.
+                    </p>
+                </div>
+
+                <!-- Item 2: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
+                    <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
+                        <i data-lucide="maximize" class="lucide-icon w-8 h-8 text-brand-primary"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-1 text-gray-800">Contorno Corporal</h3>
+                    <p class="text-xs text-gray-500">
+                        Tratamento injetável para combater flacidez e melhorar o aspecto da celulite.
+                    </p>
+                </div>
+
+                <!-- Item 3: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
+                    <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
+                        <i data-lucide="hand" class="lucide-icon w-8 h-8 text-brand-primary"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-1 text-gray-800">Drenagem e Relaxamento</h3>
+                    <p class="text-xs text-gray-500">
+                        Massagens corporais: drenagem linfática e massagens relaxantes.
+                    </p>
+                </div>
+
+                <!-- Item 4: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
+                    <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
+                        <i data-lucide="wind" class="lucide-icon w-8 h-8 text-brand-primary"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-1 text-gray-800">Terapia com Ventosas</h3>
+                    <p class="text-xs text-gray-500">
+                        Alívio da dor, relaxamento muscular e melhora da circulação com ventosa.
+                    </p>
+                </div>
+                
+                <!-- Item 5: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
+                    <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
+                        <i data-lucide="zap" class="lucide-icon w-8 h-8 text-brand-primary"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-1 text-gray-800">Terapia Capilar</h3>
+                    <p class="text-xs text-gray-500">
+                        Aplicação para tratamento de alopecia, queda e estímulo ao crescimento.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Before & After Section (Antes e Depois) -->
+    <section id="galeria" class="py-20 bg-brand-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-sm text-brand-primary uppercase font-semibold mb-2">Transformação Visual</p>
+                <h2 class="font-heading text-4xl font-bold text-gray-800">
+                    Nossa Galeria de Antes e Depois
+                </h2>
+            </div>
+
+            <!-- Grid de Antes e Depois -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Par 1: Lipo Enzimática -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transform transition duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer">
+                    <div class="grid grid-cols-2">
+                        <img 
+                            src="https://placehold.co/300x350/E9E9E9/999999?text=Antes" 
+                            alt="Resultado Antes do Tratamento" 
+                            class="w-full h-full object-cover border-r border-gray-200 aspect-[3/4]"
+                        >
+                        <img 
+                            src="https://placehold.co/300x350/A34354/ffffff?text=Depois" 
+                            alt="Resultado Depois do Tratamento" 
+                            class="w-full h-full object-cover aspect-[3/4]"
+                        >
+                    </div>
+                    <div class="p-4 text-center">
+                        <p class="font-semibold text-lg">Lipo Enzimática</p>
+                        <p class="text-xs text-gray-500">Redução de medidas e contorno.</p>
+                    </div>
+                </div>
+
+                <!-- Par 2: Terapia Capilar -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transform transition duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer">
+                    <div class="grid grid-cols-2">
+                        <img 
+                            src="https://placehold.co/300x350/E9E9E9/999999?text=Antes" 
+                            alt="Resultado Antes do Tratamento" 
+                            class="w-full h-full object-cover border-r border-gray-200 aspect-[3/4]"
+                        >
+                        <img 
+                            src="https://placehold.co/300x350/A34354/ffffff?text=Depois" 
+                            alt="Resultado Depois do Tratamento" 
+                            class="w-full h-full object-cover aspect-[3/4]"
+                        >
+                    </div>
+                    <div class="p-4 text-center">
+                        <p class="font-semibold text-lg">Terapia Capilar</p>
+                        <p class="text-xs text-gray-500">Combate à queda e crescimento.</p>
+                    </div>
+                </div>
+                
+                <!-- Par 3: Contorno Corporal -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transform transition duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer">
+                    <div class="grid grid-cols-2">
+                        <img 
+                            src="https://placehold.co/300x350/E9E9E9/999999?text=Antes" 
+                            alt="Resultado Antes do Tratamento" 
+                            class="w-full h-full object-cover border-r border-gray-200 aspect-[3/4]"
+                        >
+                        <img 
+                            src="https://placehold.co/300x350/A34354/ffffff?text=Depois" 
+                            alt="Resultado Depois do Tratamento" 
+                            class="w-full h-full object-cover aspect-[3/4]"
+                        >
+                    </div>
+                    <div class="p-4 text-center">
+                        <p class="font-semibold text-lg">Massagem Drenagem</p>
+                        <p class="text-xs text-gray-500">Melhora de inchaço e contorno.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="#galeria" class="inline-block py-3 px-8 bg-gray-200 text-text-dark font-semibold rounded-md shadow hover:bg-gray-300 transition duration-300">
+                    Ver Mais Resultados
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials/Feedback Section (Nova Seção de Feedbacks) -->
+    <section id="feedback" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-sm text-brand-primary uppercase font-semibold mb-2">A Voz de Nossos Clientes</p>
+                <h2 class="font-heading text-4xl font-bold text-gray-800">
+                    Feedbacks de Quem Transformou Sua Vida
+                </h2>
+            </div>
+
+            <!-- Grid de Testemunhos -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Testemunho 1 -->
+                <div class="p-8 bg-brand-light rounded-xl shadow-lg border-t-4 border-brand-primary transform transition duration-300 hover:shadow-2xl cursor-default">
+                    <i data-lucide="quote" class="lucide-icon w-8 h-8 text-brand-primary mb-4 opacity-70"></i>
+                    <p class="italic text-gray-700 mb-6">
+                        "O tratamento para flacidez mudou completamente minha autoestima. A Dra. [Nome do Profissional] é super atenciosa e o resultado superou todas as expectativas. Recomendo de olhos fechados!"
+                    </p>
+                    <div class="flex items-center">
+                        <img 
+                            src="https://placehold.co/50x50/cccccc/ffffff?text=C1" 
+                            alt="Foto do Cliente 1" 
+                            class="w-12 h-12 rounded-full object-cover mr-4"
+                        >
+                        <div>
+                            <p class="font-semibold text-text-dark">Mariana S.</p>
+                            <p class="text-sm text-gray-500">Tratamento Contorno Corporal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testemunho 2 -->
+                <div class="p-8 bg-brand-light rounded-xl shadow-lg border-t-4 border-brand-primary transform transition duration-300 hover:shadow-2xl cursor-default">
+                    <i data-lucide="quote" class="lucide-icon w-8 h-8 text-brand-primary mb-4 opacity-70"></i>
+                    <p class="italic text-gray-700 mb-6">
+                        "Sofria com queda de cabelo, e a terapia capilar fez milagres. Em poucos meses, notei crescimento e volume. O ambiente é acolhedor e o profissionalismo é impecável."
+                    </p>
+                    <div class="flex items-center">
+                        <img 
+                            src="https://placehold.co/50x50/cccccc/ffffff?text=C2" 
+                            alt="Foto do Cliente 2" 
+                            class="w-12 h-12 rounded-full object-cover mr-4"
+                        >
+                        <div>
+                            <p class="font-semibold text-text-dark">João P.</p>
+                            <p class="text-sm text-gray-500">Terapia Capilar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testemunho 3 -->
+                <div class="p-8 bg-brand-light rounded-xl shadow-lg border-t-4 border-brand-primary transform transition duration-300 hover:shadow-2xl cursor-default">
+                    <i data-lucide="quote" class="lucide-icon w-8 h-8 text-brand-primary mb-4 opacity-70"></i>
+                    <p class="italic text-gray-700 mb-6">
+                        "Fiz a Lipo Enzimática e a redução de medidas foi notável. O processo foi tranquilo, e os resultados me deram a motivação que eu precisava. O atendimento é nota 10!"
+                    </p>
+                    <div class="flex items-center">
+                        <img 
+                            src="https://placehold.co/50x50/cccccc/ffffff?text=C3" 
+                            alt="Foto do Cliente 3" 
+                            class="w-12 h-12 rounded-full object-cover mr-4"
+                        >
+                        <div>
+                            <p class="font-semibold text-text-dark">Patrícia L.</p>
+                            <p class="text-sm text-gray-500">Lipo Enzimática</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <!-- Botão de CTA para o Footer/Contato -->
+                <a href="#contato" class="py-3 px-8 bg-brand-primary text-white font-semibold rounded-md shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
+                    Seja o Próximo! Marque Sua Avaliação
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (Seção Sobre Mim - Foco no Perfil do Profissional) -->
+    <section id="sobre" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Coluna da Esquerda: Foto do Perfil -->
+                <div class="flex justify-center lg:justify-start">
+                    <!-- Placeholder para a foto do profissional (Formato Circular) -->
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-brand-light transform transition duration-300 hover:scale-[1.05]">
+                        <img 
+                            src="https://placehold.co/800x800/A34354/ffffff?text=Foto+do+Profissional"
+                            alt="Foto de perfil do profissional responsável pela clínica."
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+                <!-- Coluna da Direita: Conteúdo de Texto (Descrição, Formação) -->
+                <div>
+                    <p class="text-sm text-brand-primary uppercase font-semibold mb-2">Sobre Mim</p>
+                    <h2 class="font-heading text-4xl font-bold leading-tight mb-6 text-gray-800">
+                        Conheça a Dra. [Nome do Profissional]
+                    </h2>
+                    <p class="text-gray-600 mb-6">
+                        Com mais de 10 anos de experiência, sou apaixonada por realçar a beleza natural e o bem-estar através de técnicas avançadas e seguras. Minha missão é devolver a autoestima e a esperança aos meus pacientes.
+                    </p>
+
+                    <!-- Detalhes de Formação e Especialização -->
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="award" class="lucide-icon w-5 h-5 text-brand-primary mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-lg text-gray-800">Formação Acadêmica</p>
+                                <p class="text-sm text-gray-500">Graduada em Estética Avançada pela Universidade [Nome da Universidade] e Pós-graduada em Cosmetologia.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="graduation-cap" class="lucide-icon w-5 h-5 text-brand-primary mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-lg text-gray-800">Especialização</p>
+                                <p class="text-sm text-gray-500">Especialista em Técnicas Injetáveis (Enzimas e Microagulhamento) e Terapias Capilares Regenerativas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <!-- Botão na Seção Sobre Mim: Efeito 'bolha' adicionado (escala e leve levantamento) -->
+                    <a href="#contato" class="py-3 px-8 bg-brand-primary text-white font-semibold rounded-md shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
+                        Marcar Avaliação
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Rodapé Simples) -->
+    <footer id="contato" class="bg-brand-primary text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg font-semibold mb-2">Pronto para a sua transformação?</p>
+            <a href="mailto:info@email.com" class="text-white underline hover:text-gray-200 transition">info@email.com</a>
+            <p class="text-sm mt-4">&copy; 2025 Progeria. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- VLibras Widget -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-section"></div>
+        </div>
+    </div>
+    
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        // Inicializa os ícones do Lucide
+        lucide.createIcons();
+
+        // Inicializa o Widget VLibras (após o carregamento do script)
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+
+        // Lógica para o menu Hamburger
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const duration = 300; // Duração da transição em ms, deve corresponder ao CSS
+
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.contains('mobile-menu-open');
+                const icon = menuButton.querySelector('i');
+                
+                if (isOpen) {
+                    // FECHANDO: 
+                    // 1. Remove a classe 'open' para iniciar a transição visual de fechamento (escala e fade-out).
+                    mobileMenu.classList.remove('mobile-menu-open');
+                    mobileMenu.classList.add('mobile-menu-closed');
+                    
+                    // 2. Espera a animação terminar (300ms) antes de adicionar 'hidden' para remover do fluxo.
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, duration);
+
+                    // 3. Atualiza o ícone
+                    icon.setAttribute('data-lucide', 'menu');
+
+                } else {
+                    // ABRINDO:
+                    // 1. Remove 'hidden' imediatamente para que o elemento comece a ser renderizado.
+                    mobileMenu.classList.remove('hidden');
+                    
+                    // 2. Força um "repaint" (redesenho) para garantir que o browser registre o estado inicial.
+                    void mobileMenu.offsetWidth; 
+                    
+                    // 3. Remove a classe 'closed' e Adiciona 'open' para iniciar a transição visual de abertura (escala e fade-in).
+                    mobileMenu.classList.remove('mobile-menu-closed'); 
+                    mobileMenu.classList.add('mobile-menu-open');
+
+                    // 4. Atualiza o ícone
+                    icon.setAttribute('data-lucide', 'x');
+                }
+                
+                // Re-renderizar o ícone do Lucide após alterar o data-lucide
+                lucide.createIcons();
+            });
+        }
+    </script>
+</body>
+</html>
