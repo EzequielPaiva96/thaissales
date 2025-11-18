@@ -97,6 +97,88 @@
             transform: translateY(0); 
             transition: opacity 0.3s ease-in, transform 0.3s ease-in;
         }
+
+        /* ------------------------------------------------------------------ */
+        /* --- NOVO ESTILO: Botão com Efeito SHINE (Baseado em .btn-4) --- */
+        /* ------------------------------------------------------------------ */
+        .btn-shine {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            /* REMOVIDO: text-transform: uppercase; */
+            
+            /* Visual Padrão */
+            background: #A34354; /* Cor de Destaque Sólida */
+            color: #fff; /* Texto Branco */
+            border: 1px solid #A34354; /* Borda da mesma cor */
+            border-radius: 8px; 
+            overflow: hidden;
+            
+            /* Efeitos Padrão */
+            box-shadow: 0 4px 10px rgba(163, 67, 84, 0.4); /* Sombra inicial */
+            transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1); /* Tempo de transição */
+        }
+
+        /* Efeito Brilho (Pseudo-elemento :after) */
+        .btn-shine::after {
+            background: #fff;
+            content: "";
+            height: 155px;
+            left: -75px;
+            opacity: .3; /* Aumentei um pouco a opacidade para maior visibilidade */
+            position: absolute;
+            top: -50px;
+            transform: rotate(35deg);
+            transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+            width: 50px;
+            z-index: 1; /* Abaixo do texto */
+        }
+
+        /* Brilho no Hover */
+        .btn-shine:hover {
+            transform: scale(1.05); /* Efeito de 'bolha' mantido */
+            box-shadow: 0 8px 20px rgba(163, 67, 84, 0.6); /* Sombra mais forte */
+        }
+
+        .btn-shine:hover::after {
+            left: 120%; /* Move o brilho para a direita */
+            transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        /* Conteúdo do Botão (Texto) */
+        .btn-shine span {
+            position: relative; 
+            z-index: 20; /* Sempre acima do brilho */
+            color: #fff; 
+            padding: 0 10px; 
+        }
+
+        /* --- Variações de Tamanho --- */
+
+        /* Small Header Button (150x40) */
+        .btn-shine-small {
+            width: 150px; 
+            height: 40px; 
+            font-size: 14px;
+        }
+
+        /* Default/Hero Button (200x60) */
+        .btn-shine-default {
+            width: 200px; 
+            height: 60px; 
+            font-size: 16px;
+        }
+
+        /* Wide Button (280x60 para o CTA maior) */
+        .btn-shine-wide {
+            width: 280px; 
+            height: 60px; 
+            font-size: 16px;
+        }
     </style>
 </head>
 <body class="font-sans text-text-dark bg-white">
@@ -132,17 +214,17 @@
 
                 <!-- Navegação Desktop (visível apenas em telas grandes) -->
                 <nav class="hidden md:flex flex-grow justify-center space-x-4 lg:space-x-8">
-                    <a href="#home" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">HOME</a>
-                    <a href="#sobre" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">SOBRE MIM</a>
-                    <a href="#servicos" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">SERVIÇOS</a>
-                    <a href="#contato" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">CONTATO</a>
+                    <a href="#home" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">Home</a>
+                    <a href="#sobre" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">Sobre Mim</a>
+                    <a href="#servicos" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">Serviços</a>
+                    <a href="#contato" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">Contato</a>
                 </nav>
 
                 <!-- Grupo de Botões (CTA Desktop e Hambúrguer Mobile) -->
-                <div class="flex items-center space-x-2">
-                    <!-- CTA Button (visible on desktop) -->
-                    <a href="#contato" class="hidden md:block py-3 px-6 bg-white text-brand-primary font-semibold rounded-full shadow-md hover:bg-gray-100 transition duration-300 transform hover:scale-105">
-                        Marcar Avaliação
+                <div class="flex items-center space-x-2 p-2">
+                    <!-- CTA Button (visible on desktop) - USA CLASSE SHINE SMALL -->
+                    <a href="#contato" class="hidden md:flex btn-shine btn-shine-small">
+                        <span>Marcar Avaliação</span>
                     </a>
 
                     <!-- Mobile Menu Button (hidden on desktop) -->
@@ -158,11 +240,12 @@
         <nav id="mobile-menu" class="fixed w-full top-[100px] bottom-0 z-30 glass-effect mobile-menu-closed hidden">
             <!-- Container dos itens do menu: h-full para preencher o overlay e overflow-y-auto para permitir scroll -->
             <div class="px-4 pt-4 pb-3 space-y-1 h-full overflow-y-auto">
-                <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">HOME</a>
-                <a href="#sobre" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">SOBRE MIM</a>
-                <a href="#servicos" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">SERVIÇOS</a>
-                <a href="#contato" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">CONTATO</a>
-                <!-- O botão de CTA foi alterado para um link de texto simples, mas com destaque na cor da marca -->
+                <!-- Links de Menu Mobile (MANTIDOS SIMPLES) -->
+                <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">Home</a>
+                <a href="#sobre" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">Sobre Mim</a>
+                <a href="#servicos" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">Serviços</a>
+                <a href="#contato" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">Contato</a>
+                <!-- CTA MOBILE (MANTIDO SIMPLES) -->
                 <a href="#contato" class="block px-3 py-3 rounded-md text-base font-semibold text-brand-primary hover:bg-gray-100 transition mt-4" onclick="document.getElementById('mobile-menu-button').click();">
                     Marcar Avaliação
                 </a>
@@ -192,11 +275,11 @@
                     </p>
 
                     <div class="flex space-x-4 items-center">
-                        <!-- Botão na Seção Hero: Efeito 'bolha' adicionado (escala e leve levantamento) -->
-                        <a href="#contato" class="py-3 px-8 bg-brand-primary text-white font-semibold rounded-md shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
-                            Marcar Avaliação
+                        <!-- Botão na Seção Hero: USA CLASSE SHINE DEFAULT -->
+                        <a href="#contato" class="btn-shine btn-shine-default">
+                            <span>Marcar Avaliação</span>
                         </a>
-                        <!-- Botão Secundário: Linkado para Serviços -->
+                        <!-- Botão Secundário: Linkado para Serviços (MANTIDO SIMPLES) -->
                         <a href="#servicos" class="text-gray-600 font-medium hover:text-brand-primary transition">
                             Todos os Serviços
                         </a>
@@ -229,10 +312,10 @@
                     Serviços Estéticos e de Bem-Estar
                 </h2>
             </div>
-            <!-- Grid de Ícones -->
+            <!-- Grid de Ícones (SEM ALTERAÇÃO - Não são botões primários) -->
             <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
                 
-                <!-- Item 1: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <!-- Item 1: Lipo Enzimática -->
                 <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
                     <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
                         <i data-lucide="droplet" class="lucide-icon w-8 h-8 text-brand-primary"></i>
@@ -243,7 +326,7 @@
                     </p>
                 </div>
 
-                <!-- Item 2: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <!-- Item 2: Contorno Corporal -->
                 <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
                     <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
                         <i data-lucide="maximize" class="lucide-icon w-8 h-8 text-brand-primary"></i>
@@ -254,7 +337,7 @@
                     </p>
                 </div>
 
-                <!-- Item 3: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <!-- Item 3: Drenagem e Relaxamento -->
                 <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
                     <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
                         <i data-lucide="hand" class="lucide-icon w-8 h-8 text-brand-primary"></i>
@@ -265,7 +348,7 @@
                     </p>
                 </div>
 
-                <!-- Item 4: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <!-- Item 4: Terapia com Ventosas -->
                 <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
                     <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
                         <i data-lucide="wind" class="lucide-icon w-8 h-8 text-brand-primary"></i>
@@ -276,7 +359,7 @@
                     </p>
                 </div>
                 
-                <!-- Item 5: Efeito 'bolha' aplicado a todos os cartões de serviço -->
+                <!-- Item 5: Terapia Capilar -->
                 <div class="p-4 flex flex-col items-center group cursor-pointer hover:shadow-2xl rounded-lg transition duration-300 transform hover:scale-[1.05]">
                     <div class="p-3 mb-4 inline-block border border-gray-200 rounded-full group-hover:border-brand-primary transition duration-300">
                         <i data-lucide="zap" class="lucide-icon w-8 h-8 text-brand-primary"></i>
@@ -301,7 +384,7 @@
                 </h2>
             </div>
 
-            <!-- Grid de Antes e Depois -->
+            <!-- Grid de Antes e Depois (MANTIDO SIMPLES) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
                 <!-- Par 1: Lipo Enzimática -->
@@ -366,6 +449,7 @@
             </div>
             
             <div class="text-center mt-10">
+                <!-- Botão Secundário Ver Mais (MANTIDO SIMPLES) -->
                 <a href="#galeria" class="inline-block py-3 px-8 bg-gray-200 text-text-dark font-semibold rounded-md shadow hover:bg-gray-300 transition duration-300">
                     Ver Mais Resultados
                 </a>
@@ -383,7 +467,7 @@
                 </h2>
             </div>
 
-            <!-- Grid de Testemunhos -->
+            <!-- Grid de Testemunhos (SEM ALTERAÇÃO) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
                 <!-- Testemunho 1 -->
@@ -445,9 +529,9 @@
             </div>
             
             <div class="text-center mt-10">
-                <!-- Botão de CTA para o Footer/Contato -->
-                <a href="#contato" class="py-3 px-8 bg-brand-primary text-white font-semibold rounded-md shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
-                    Seja o Próximo! Marque Sua Avaliação
+                <!-- Botão de CTA para o Footer/Contato: USA CLASSE SHINE WIDE -->
+                <a href="#contato" class="btn-shine btn-shine-wide">
+                    <span>Seja o Próximo! Marque Sua Avaliação</span>
                 </a>
             </div>
         </div>
@@ -480,7 +564,7 @@
                         Com mais de 10 anos de experiência, sou apaixonada por realçar a beleza natural e o bem-estar através de técnicas avançadas e seguras. Minha missão é devolver a autoestima e a esperança aos meus pacientes.
                     </p>
 
-                    <!-- Detalhes de Formação e Especialização -->
+                    <!-- Detalhes de Formação e Especialização (SEM ALTERAÇÃO) -->
                     <div class="space-y-4 mb-8">
                         <div class="flex items-start space-x-3">
                             <i data-lucide="award" class="lucide-icon w-5 h-5 text-brand-primary mt-1"></i>
@@ -498,9 +582,9 @@
                         </div>
                     </div>
                     
-                    <!-- Botão na Seção Sobre Mim: Efeito 'bolha' adicionado (escala e leve levantamento) -->
-                    <a href="#contato" class="py-3 px-8 bg-brand-primary text-white font-semibold rounded-md shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
-                        Marcar Avaliação
+                    <!-- Botão na Seção Sobre Mim: USA CLASSE SHINE DEFAULT -->
+                    <a href="#contato" class="btn-shine btn-shine-default">
+                        <span>Marcar Avaliação</span>
                     </a>
                 </div>
             </div>
