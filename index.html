@@ -123,26 +123,34 @@
     <!-- A classe sticky top-0 garante que o menu flutue no topo -->
     <header class="sticky top-0 z-40 py-4 md:py-8 lg:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Container em formato de pílula - Alterado para as cores da página -->
-            <div class="max-w-xl mx-auto flex justify-between items-center bg-brand-light p-2 rounded-[50px] shadow-xl border border-gray-200">
+            <!-- Container em formato de pílula: mais largo no desktop (md:max-w-5xl) -->
+            <div class="max-w-xl md:max-w-5xl mx-auto flex justify-between items-center bg-brand-light p-2 rounded-[50px] shadow-xl border border-gray-200">
                 
-                <!-- Botão da Esquerda (CTA: Marcar Avaliação) -->
-                <!-- Botão branco com texto em brand-primary -->
-                </a>
-
-                <!-- Logo Central -->
-                <!-- Cor do texto da logo foi alterada para o texto-dark (preto) -->
-                <a href="#home" class="flex items-center flex-grow justify-center -ml-8"> 
-                    <!-- O -ml-8 é um ajuste visual para centralizar a logo após o padding do botão esquerdo -->
-                    <!-- Placeholder para a logo -->
+                <!-- Logo (sempre visível no lado esquerdo) -->
+                <a href="#home" class="flex items-center p-2"> 
                     <img src="https://placehold.co/150x40/A34354/ffffff?text=LOGO" alt="Logotipo da Clínica Progeria" class="h-10 w-auto">
                 </a>
 
-                <!-- Botão da Direita (Menu Hambúrguer) -->
-                <!-- Botão branco com texto em brand-primary -->
-                <button id="mobile-menu-button" class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg text-brand-primary hover:text-brand-primary focus:outline-none transition duration-300 transform hover:scale-105 border border-gray-200">
-                    <i data-lucide="menu" class="lucide-icon w-8 h-8"></i>
-                </button>
+                <!-- Navegação Desktop (visível apenas em telas grandes) -->
+                <nav class="hidden md:flex flex-grow justify-center space-x-4 lg:space-x-8">
+                    <a href="#home" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">HOME</a>
+                    <a href="#sobre" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">SOBRE MIM</a>
+                    <a href="#servicos" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">SERVIÇOS</a>
+                    <a href="#contato" class="text-text-dark font-medium hover:text-brand-primary transition p-2 rounded-full hover:bg-white px-4">CONTATO</a>
+                </nav>
+
+                <!-- Grupo de Botões (CTA Desktop e Hambúrguer Mobile) -->
+                <div class="flex items-center space-x-2">
+                    <!-- CTA Button (visible on desktop) -->
+                    <a href="#contato" class="hidden md:block py-3 px-6 bg-white text-brand-primary font-semibold rounded-full shadow-md hover:bg-gray-100 transition duration-300 transform hover:scale-105">
+                        Marcar Avaliação
+                    </a>
+
+                    <!-- Mobile Menu Button (hidden on desktop) -->
+                    <button id="mobile-menu-button" class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg text-brand-primary hover:text-brand-primary focus:outline-none transition duration-300 transform hover:scale-105 border border-gray-200 md:hidden">
+                        <i data-lucide="menu" class="lucide-icon w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
         </div>
         
@@ -491,7 +499,6 @@
                         </div>
                     </div>
                     
-
                     <!-- Botão na Seção Sobre Mim: Efeito 'bolha' adicionado (escala e leve levantamento) -->
                     <a href="#contato" class="py-3 px-8 bg-brand-primary text-white font-semibold rounded-md shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
                         Marcar Avaliação
