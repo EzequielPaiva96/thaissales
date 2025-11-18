@@ -102,7 +102,7 @@
 </head>
 <body class="font-sans text-text-dark bg-white">
 
-    <!-- Top Bar (Barra Superior) -->
+    <!-- Top Bar (Barra Superior) - Mantida, mas oculta em telas grandes para focar no novo menu -->
     <div class="bg-brand-light py-2 border-b border-gray-100 hidden md:block">
         <div class="max-w-7xl mx-auto flex justify-end px-4 sm:px-6 lg:px-8">
             <span class="text-xs text-gray-500 mr-4">Bem-vindo(a) à nossa companhia!</span>
@@ -119,40 +119,36 @@
         </div>
     </div>
 
-    <!-- Header (Navegação Principal) -->
-    <header class="sticky top-0 z-40 bg-white shadow-sm">
+    <!-- Header (Navegação Principal com Novo Design 'Pílula') -->
+    <!-- A classe sticky top-0 garante que o menu flutue no topo -->
+    <header class="sticky top-0 z-40 py-4 md:py-8 lg:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Padding do Cabeçalho aumentado de h-20 para py-6 -->
-            <div class="flex justify-between items-center py-6">
-                <!-- Logo (Placeholder para imagem) -->
-                <!-- Substitua o src="https://placehold.co/..." pelo URL da sua logo. -->
-                <a href="#home" class="flex items-center space-x-2">
+            <!-- Container em formato de pílula - Alterado para as cores da página -->
+            <div class="max-w-xl mx-auto flex justify-between items-center bg-brand-light p-2 rounded-[50px] shadow-xl border border-gray-200">
+                
+                <!-- Botão da Esquerda (CTA: Marcar Avaliação) -->
+                <!-- Botão branco com texto em brand-primary -->
+                </a>
+
+                <!-- Logo Central -->
+                <!-- Cor do texto da logo foi alterada para o texto-dark (preto) -->
+                <a href="#home" class="flex items-center flex-grow justify-center -ml-8"> 
+                    <!-- O -ml-8 é um ajuste visual para centralizar a logo após o padding do botão esquerdo -->
+                    <!-- Placeholder para a logo -->
                     <img src="https://placehold.co/150x40/A34354/ffffff?text=LOGO" alt="Logotipo da Clínica Progeria" class="h-10 w-auto">
                 </a>
 
-                <!-- Navegação Desktop -->
-                <nav class="hidden lg:flex space-x-8 items-center text-sm font-medium">
-                    <a href="#home" class="text-text-dark hover:text-brand-primary transition">HOME</a>
-                    <a href="#sobre" class="text-text-dark hover:text-brand-primary transition">SOBRE MIM</a>
-                    <!-- Páginas e Notícias removidos -->
-                    <a href="#servicos" class="text-text-dark hover:text-brand-primary transition">SERVIÇOS</a>
-                    <a href="#contato" class="text-text-dark hover:text-brand-primary transition">CONTATO</a>
-                    <!-- Botão de CTA no Header: Efeito 'bolha' adicionado (escala e leve levantamento) -->
-                    <a href="#contato" class="py-4 px-8 bg-brand-primary text-white text-sm font-semibold rounded-xl shadow-lg transition duration-300 transform hover:scale-[1.02] hover:shadow-xl hover:-translate-y-0.5">
-                        Marcar Avaliação
-                    </a>
-                </nav>
-
-                <!-- Menu Mobile Button -->
-                <button id="mobile-menu-button" class="lg:hidden text-gray-600 hover:text-brand-primary focus:outline-none">
-                    <i data-lucide="menu" class="lucide-icon w-6 h-6"></i>
+                <!-- Botão da Direita (Menu Hambúrguer) -->
+                <!-- Botão branco com texto em brand-primary -->
+                <button id="mobile-menu-button" class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg text-brand-primary hover:text-brand-primary focus:outline-none transition duration-300 transform hover:scale-105 border border-gray-200">
+                    <i data-lucide="menu" class="lucide-icon w-8 h-8"></i>
                 </button>
             </div>
         </div>
         
         <!-- Mobile Menu Container (FIXED OVERLAY com Efeito Glass) -->
-        <!-- top-[96px] é uma estimativa da altura do cabeçalho. z-30 para ficar abaixo do cabeçalho. -->
-        <nav id="mobile-menu" class="lg:hidden fixed w-full top-[96px] bottom-0 z-30 glass-effect mobile-menu-closed hidden">
+        <!-- top-[100px] ajustado para acomodar o novo cabeçalho maior -->
+        <nav id="mobile-menu" class="fixed w-full top-[100px] bottom-0 z-30 glass-effect mobile-menu-closed hidden">
             <!-- Container dos itens do menu: h-full para preencher o overlay e overflow-y-auto para permitir scroll -->
             <div class="px-4 pt-4 pb-3 space-y-1 h-full overflow-y-auto">
                 <a href="#home" class="block px-3 py-3 rounded-md text-base font-medium text-text-dark hover:bg-gray-100 hover:text-brand-primary transition" onclick="document.getElementById('mobile-menu-button').click();">HOME</a>
