@@ -79,23 +79,22 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
         }
 
-        /* --- Estilos de Animação para o Menu Mobile (Efeito 'Ripple/Splash') --- */
+        /* --- Estilos de Animação para o Menu Mobile (Efeito 'Drop Down Vertical') --- */
         
         /* Classe inicial para o estado fechado (oculto) */
         .mobile-menu-closed {
             opacity: 0;
-            /* Inicia ligeiramente encolhido e invisível */
-            transform: scale(0.95); 
+            /* Começa ligeiramente acima do topo visível */
+            transform: translateY(-20px); 
             transform-origin: top center; 
-            /* Transições mais simples para o overlay */
             transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
 
         /* Classe para o estado aberto */
         .mobile-menu-open {
             opacity: 1;
-            /* Expande para o tamanho normal */
-            transform: scale(1); 
+            /* Move para a posição final definida pelo 'top-[100px]' no HTML */
+            transform: translateY(0); 
             transition: opacity 0.3s ease-in, transform 0.3s ease-in;
         }
     </style>
